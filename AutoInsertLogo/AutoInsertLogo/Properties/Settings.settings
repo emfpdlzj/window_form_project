@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AutoInsertLogo.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="label1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">원본매뉴얼</Value>
+    </Setting>
+    <Setting Name="label2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">첨부 이미지</Value>
+    </Setting>
+    <Setting Name="button2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">로고 추가</Value>
+    </Setting>
+    <Setting Name="button3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">생성</Value>
+    </Setting>
+    <Setting Name="button4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">닫기</Value>
+    </Setting>
+    <Setting Name="button1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">파일 찾기</Value>
+    </Setting>
+    <Setting Name="label3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">로고 미리보기</Value>
+    </Setting>
+    <Setting Name="button5" Type="System.String" Scope="User">
+      <Value Profile="(Default)">로고 삭제</Value>
+    </Setting>
+    <Setting Name="Form1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AutoInsertLogo</Value>
+    </Setting>
+    <Setting Name="AutoInsertLogo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">매뉴얼 로고 자동 삽입</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

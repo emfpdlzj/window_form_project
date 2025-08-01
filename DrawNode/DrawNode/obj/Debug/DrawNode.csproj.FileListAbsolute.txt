@@ -1,0 +1,10 @@
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\bin\Debug\DrawNode.exe.config
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\bin\Debug\DrawNode.exe
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\bin\Debug\DrawNode.pdb
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.csproj.AssemblyReference.cache
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.DrawNode.resources
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.Properties.Resources.resources
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.csproj.GenerateResource.cache
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.csproj.CoreCompileInputs.cache
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.exe
+D:\01. Dev\_Code_\박민정작업폴더\DrawNode\DrawNode\obj\Debug\DrawNode.pdb

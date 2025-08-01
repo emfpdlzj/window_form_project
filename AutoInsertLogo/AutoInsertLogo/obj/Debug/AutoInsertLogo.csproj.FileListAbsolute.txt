@@ -1,0 +1,11 @@
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.exe.config
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.exe
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.pdb
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.AssemblyReference.cache
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.Properties.Resources.resources
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.GenerateResource.cache
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.CoreCompileInputs.cache
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.exe
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.pdb
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.ResolveComReference.cache
+D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.SolidIT_AutoInsertLogo.resources
