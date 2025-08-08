@@ -9,3 +9,14 @@ D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\
 D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.pdb
 D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.ResolveComReference.cache
 D:\01. Dev\_Code_\박민정작업폴더\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.SolidIT_AutoInsertLogo.resources
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.exe.config
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.exe
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\bin\Debug\AutoInsertLogo.pdb
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.AssemblyReference.cache
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.ResolveComReference.cache
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.mainForm.resources
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.Properties.Resources.resources
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.GenerateResource.cache
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.csproj.CoreCompileInputs.cache
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.exe
+C:\Users\solidit\OneDrive\바탕 화면\window_form_project\AutoInsertLogo\AutoInsertLogo\obj\Debug\AutoInsertLogo.pdb

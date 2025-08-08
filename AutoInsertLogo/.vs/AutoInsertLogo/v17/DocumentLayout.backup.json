@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\",
+  "WorkspaceRootPath": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|d:\\01. dev\\_code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\autoinsertlogo\\autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|solutionrelative:autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|solutionrelative:autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\autoinsertlogo\\backup.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|c:\\users\\solidit\\onedrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\autoinsertlogo\\autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|solutionrelative:autoinsertlogo\\backup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\autoinsertlogo\\backup.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{635F96FA-7722-4D3A-A435-DB944680AB48}|AutoInsertLogo\\AutoInsertLogo.csproj|solutionrelative:autoinsertlogo\\backup.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -36,9 +36,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "backup.Designer.cs",
-              "DocumentMoniker": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.Designer.cs",
               "RelativeDocumentMoniker": "AutoInsertLogo\\backup.Designer.cs",
-              "ToolTip": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.Designer.cs",
+              "ToolTip": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.Designer.cs",
               "RelativeToolTip": "AutoInsertLogo\\backup.Designer.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAwBYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -47,25 +47,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "backup.cs",
-              "DocumentMoniker": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.cs",
+              "DocumentMoniker": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.cs",
               "RelativeDocumentMoniker": "AutoInsertLogo\\backup.cs",
-              "ToolTip": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.cs",
-              "RelativeToolTip": "AutoInsertLogo\\backup.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.cs*",
+              "RelativeToolTip": "AutoInsertLogo\\backup.cs*",
+              "ViewState": "AgIAALoAAAAAAAAAAAAqwNgAAABpAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T07:07:59.104Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "backup.cs [\uB514\uC790\uC778]",
-              "DocumentMoniker": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.cs",
+              "DocumentMoniker": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.cs",
               "RelativeDocumentMoniker": "AutoInsertLogo\\backup.cs",
-              "ToolTip": "D:\\01. Dev\\_Code_\\\uBC15\uBBFC\uC815\uC791\uC5C5\uD3F4\uB354\\AutoInsertLogo\\AutoInsertLogo\\backup.cs [\uB514\uC790\uC778]",
-              "RelativeToolTip": "AutoInsertLogo\\backup.cs [\uB514\uC790\uC778]",
+              "ToolTip": "C:\\Users\\solidit\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\window_form_project\\AutoInsertLogo\\AutoInsertLogo\\backup.cs [\uB514\uC790\uC778]*",
+              "RelativeToolTip": "AutoInsertLogo\\backup.cs [\uB514\uC790\uC778]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T07:06:53.769Z",
               "EditorCaption": " [\uB514\uC790\uC778]"
