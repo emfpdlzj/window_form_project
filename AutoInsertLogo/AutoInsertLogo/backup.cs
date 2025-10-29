@@ -25,7 +25,7 @@ namespace AutoInsertLogo
                 string file_path = openFileDialog1.FileName; //오픈한 파일의 경로 선택
                 string ext = Path.GetExtension(file_path).ToLower();
 
-                if (ext != ".docx") 
+                if (ext != ".docx")
                 {
                     MessageBox.Show(" Word 파일(.docx)만 선택할 수 있습니다.", "잘못된 파일 형식", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -56,7 +56,7 @@ namespace AutoInsertLogo
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (files.Length > 0)
             {
-                string ext = Path.GetExtension(files[0]).ToLower(); 
+                string ext = Path.GetExtension(files[0]).ToLower();
                 if (ext == ".docx") //워드파일일 경우만 드랍가능
                 {
                     textBox1.Text = files[0];
@@ -84,7 +84,7 @@ namespace AutoInsertLogo
 
                     if (ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".bmp")
                     {
-                        if (!listBox1.Items.Contains(file)) 
+                        if (!listBox1.Items.Contains(file))
                         {
                             listBox1.Items.Add(file); //리스트박스에 선택한 이미지 첨부
                         }
@@ -107,7 +107,7 @@ namespace AutoInsertLogo
 
         private void listBox1_DragEnter(object sender, DragEventArgs e) //드래그로 이미지 첨부 가능, 엔터시
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Copy;
             }
@@ -166,7 +166,7 @@ namespace AutoInsertLogo
                 string imagePath = listBox1.Items[i].ToString();  //i 번째 이미지 
 
                 string folder = Path.GetDirectoryName(originalPath);
-                string originalFileName = Path.GetFileNameWithoutExtension(originalPath); 
+                string originalFileName = Path.GetFileNameWithoutExtension(originalPath);
                 string extension = Path.GetExtension(originalPath);
                 string imageName = Path.GetFileNameWithoutExtension(imagePath);
                 string copyPath = Path.Combine(folder, $"{originalFileName}({imageName}){extension}"); //위 네줄에서 구해온 정보로, 파일 명 만들기. 워드이름(이미지이름).docx
@@ -192,28 +192,50 @@ namespace AutoInsertLogo
                     shape.Left = CmToPt(0);   // 왼쪽 여백 임의변경 (현재는 솔리드it아이콘 바로 아래.)
 
                     // 2. 머리말 삽입 (표지 제외)
-                    var section = doc.Sections[1]; // 두 번째 섹션(페이지) 선택
-                    var header = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary]; //헤더수정 
-                    var inline = header.Range.InlineShapes.AddPicture(imagePath); //로고를 inline방식으로 삽입
-                    dynamic headerImage = inline.ConvertToShape(); // shape방식으로 변경 (편집 용이)
+                    // 전체 섹션의 '이전 머리글과 연결' 해제
+                    for (int si = 1; si <= doc.Sections.Count; si++)
+                    {
+                        var s = doc.Sections[si];
+                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].LinkToPrevious = false; } catch { }
+                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage].LinkToPrevious = false; } catch { }
+                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterEvenPages].LinkToPrevious = false; } catch { }
+                    }
 
-                    // 배치 설정
-                    headerImage.WrapFormat.Type = Word.WdWrapType.wdWrapBehind; // 텍스트 뒤 형식
-                    headerImage.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue; // 이미지 비율 고정
+                    // 섹션1은 '첫 페이지만 다르게' → Primary 헤더가 2페이지부터 노출됨
+                    doc.Sections[1].PageSetup.DifferentFirstPageHeaderFooter = -1; // true
 
-                    headerImage.RelativeHorizontalPosition = Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin; //가로 정렬 기준을 여백으로 설정.
-                    headerImage.Left = (float)Word.WdShapePosition.wdShapeRight;  //가로 위치를 여백 기준 '오른쪽 끝'으로 정렬
-                    headerImage.RelativeVerticalPosition = Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin; //세로 정렬 기준을 여백으로 설정 
-                    headerImage.Top = CmToPt(-2.4); // 세로 위치를 여백 기준 -2.3로 설정.
+                    // 섹션2 이후는 모두 같은 헤더 사용
+                    for (int secIdx = 2; secIdx <= doc.Sections.Count; secIdx++)
+                    {
+                        doc.Sections[secIdx].PageSetup.DifferentFirstPageHeaderFooter = 0; // false
+                    }
 
-                    headerImage.Height = CmToPt(0.8); //비율유지, 높이 0.8
-                    //header.Image.Width = CmToPt(3.5); //너비 기준으로 하고싶은경우 사용 
+                    // 각 섹션의 Primary 헤더에 동일 이미지 삽입
+                    for (int secIdx = 1; secIdx <= doc.Sections.Count; secIdx++)
+                    {
+                        var sec = doc.Sections[secIdx];
+                        var header = sec.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary]; //헤더수정 
+
+                        var inl = header.Range.InlineShapes.AddPicture(imagePath); //로고를 inline방식으로 삽입
+                        dynamic headerImage = inl.ConvertToShape(); // shape방식으로 변경 (편집 용이)
+
+                        // 배치 설정(그대로 유지)
+                        headerImage.WrapFormat.Type = Word.WdWrapType.wdWrapBehind; // 텍스트 뒤 형식
+                        headerImage.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue; // 이미지 비율 고정
+
+                        headerImage.RelativeHorizontalPosition = Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin; //가로 기준: 여백
+                        headerImage.Left = (float)Word.WdShapePosition.wdShapeRight;  //오른쪽 끝
+                        headerImage.RelativeVerticalPosition = Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin; //세로 기준: 여백
+                        headerImage.Top = CmToPt(-2.4); // 세로 위치
+                        headerImage.Height = CmToPt(0.8); //비율 유지, 높이 0.8
+                                                          //headerImage.Width = CmToPt(3.5); //너비 기준으로 하고싶은경우 사용 
+                    }
 
                     doc.Save();
                     doc.Close();
                     wordApp.Quit();
                 }
-                catch (Exception ex)    
+                catch (Exception ex)
                 {
                     MessageBox.Show("워드 편집 중 오류 발생:\n" + ex.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
