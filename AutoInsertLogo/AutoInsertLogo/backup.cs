@@ -10,10 +10,28 @@ namespace AutoInsertLogo
 {
     public partial class mainForm : Form
     {
-        public mainForm()
+        public mainForm() //종료/예외 훅 추가
         {
             InitializeComponent();
+
+            Application.ThreadException += (s, e) =>
+            {
+                try { MessageBox.Show("예상치 못한 오류가 발생했습니다.\n열린 Word 인스턴스를 정리합니다.\n\n" + e.Exception.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                catch { }
+                finally { WordSafe.CleanupAll(killLeftover: true); }
+            };
+
+            AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+            {
+                try { MessageBox.Show("치명적 오류로 종료합니다.\n열린 Word 인스턴스를 정리합니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                catch { }
+                finally { WordSafe.CleanupAll(killLeftover: true); }
+            };
+
+            Application.ApplicationExit += (s, e) => { WordSafe.CleanupAll(killLeftover: true); };
+            this.FormClosing += (s, e) => { WordSafe.CleanupAll(killLeftover: true); };
         }
+
         private void button1_Click(object sender, EventArgs e) //파일 찾기 버튼 클릭
         {
             textBox1.Clear();
@@ -145,105 +163,110 @@ namespace AutoInsertLogo
             }
         }
 
-        private void button3_Click(object sender, EventArgs e) // 워드 파일 생성 버튼, 메인 기능.
+        private void button3_Click(object sender, EventArgs e)
         {
             string originalPath = textBox1.Text;
 
-            if (string.IsNullOrEmpty(originalPath) || !File.Exists(originalPath)) //워드파일이 없을시 오류메시지
+            if (string.IsNullOrEmpty(originalPath) || !File.Exists(originalPath))
             {
                 MessageBox.Show("유효한 Word 파일을 먼저 업로드해주세요.", "파일 없음", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            if (listBox1.Items.Count == 0) //이미지 파일이 없을시 오류메시지
+            if (listBox1.Items.Count == 0)
             {
                 MessageBox.Show("이미지 파일을 먼저 첨부해주세요.", "이미지 없음", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            for (int i = 0; i < listBox1.Items.Count; i++) //업로드된 이미지 파일 수만큼 반복.
+            Word.Application app = null;
+
+            try
             {
-                string imagePath = listBox1.Items[i].ToString();  //i 번째 이미지 
+                app = WordSafe.StartApp(visible: false); // 한 번만 띄워서 모든 작업
 
-                string folder = Path.GetDirectoryName(originalPath);
-                string originalFileName = Path.GetFileNameWithoutExtension(originalPath);
-                string extension = Path.GetExtension(originalPath);
-                string imageName = Path.GetFileNameWithoutExtension(imagePath);
-                string copyPath = Path.Combine(folder, $"{originalFileName}({imageName}){extension}"); //위 네줄에서 구해온 정보로, 파일 명 만들기. 워드이름(이미지이름).docx
-
-                try
+                for (int i = 0; i < listBox1.Items.Count; i++)
                 {
-                    File.Copy(originalPath, copyPath, true);
+                    string imagePath = listBox1.Items[i].ToString();
 
-                    var wordApp = new Microsoft.Office.Interop.Word.Application();
-                    wordApp.Visible = false; //true로 하면 word 창 볼 수 있음
-                    var doc = wordApp.Documents.Open(copyPath);
+                    string folder = Path.GetDirectoryName(originalPath);
+                    string originalFileName = Path.GetFileNameWithoutExtension(originalPath);
+                    string extension = Path.GetExtension(originalPath);
+                    string imageName = Path.GetFileNameWithoutExtension(imagePath);
+                    string copyPath = Path.Combine(folder, $"{originalFileName}({imageName}){extension}");
 
-                    // 1. 표지에 로고이미지 삽입
-                    var firstPageRange = doc.Sections[1].Range;
-                    var inlineShape = firstPageRange.InlineShapes.AddPicture(imagePath); //inline방식으로 로고 삽입
-                    var shape = inlineShape.ConvertToShape(); // shape방식으로 변경 (편집 용이)   
-                    shape.WrapFormat.Type = Microsoft.Office.Interop.Word.WdWrapType.wdWrapFront; //텍스트 앞 형식
+                    Word.Document doc = null;
 
-                    shape.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue; // 비율 유지
-                    shape.Height = CmToPt(1.2); // 높이 1.2센치 , 임의변경가능
-                    //shape.Width=CmToPt(3.5); //너비기준 하고싶은 경우 사용
-                    shape.Top = CmToPt(11.2);     // 위쪽 여백, 임의변경 (현재는 솔리드it아이콘 바로 아래.)
-                    shape.Left = CmToPt(0);   // 왼쪽 여백 임의변경 (현재는 솔리드it아이콘 바로 아래.)
-
-                    // 2. 머리말 삽입 (표지 제외)
-                    // 전체 섹션의 '이전 머리글과 연결' 해제
-                    for (int si = 1; si <= doc.Sections.Count; si++)
+                    try
                     {
-                        var s = doc.Sections[si];
-                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].LinkToPrevious = false; } catch { }
-                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage].LinkToPrevious = false; } catch { }
-                        try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterEvenPages].LinkToPrevious = false; } catch { }
+                        File.Copy(originalPath, copyPath, true);
+
+                        doc = WordSafe.OpenDoc(app, copyPath);
+
+                        // === 표지 로고 삽입 (기존 로직) ===
+                        var firstPageRange = doc.Sections[1].Range;
+                        var inlineShape = firstPageRange.InlineShapes.AddPicture(imagePath);
+                        var shape = inlineShape.ConvertToShape();
+                        shape.WrapFormat.Type = Word.WdWrapType.wdWrapFront;
+                        shape.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue;
+                        shape.Height = CmToPt(1.2);
+                        shape.Top = CmToPt(11.2);
+                        shape.Left = CmToPt(0);
+
+                        // === 머리말 삽입: 표지 제외, 기존 로직 ===
+                        for (int si = 1; si <= doc.Sections.Count; si++)
+                        {
+                            var s = doc.Sections[si];
+                            try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].LinkToPrevious = false; } catch { }
+                            try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage].LinkToPrevious = false; } catch { }
+                            try { s.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterEvenPages].LinkToPrevious = false; } catch { }
+                        }
+
+                        doc.Sections[1].PageSetup.DifferentFirstPageHeaderFooter = -1; // true
+                        for (int secIdx = 2; secIdx <= doc.Sections.Count; secIdx++)
+                            doc.Sections[secIdx].PageSetup.DifferentFirstPageHeaderFooter = 0; // false
+
+                        for (int secIdx = 1; secIdx <= doc.Sections.Count; secIdx++)
+                        {
+                            var sec = doc.Sections[secIdx];
+                            var header = sec.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary];
+
+                            var inl = header.Range.InlineShapes.AddPicture(imagePath);
+                            dynamic headerImage = inl.ConvertToShape();
+
+                            headerImage.WrapFormat.Type = Word.WdWrapType.wdWrapBehind;
+                            headerImage.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue;
+
+                            headerImage.RelativeHorizontalPosition = Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin;
+                            headerImage.Left = (float)Word.WdShapePosition.wdShapeRight;
+                            headerImage.RelativeVerticalPosition = Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin;
+                            headerImage.Top = CmToPt(-2.4);
+                            headerImage.Height = CmToPt(0.8);
+                        }
+
+                        doc.Save();
                     }
-
-                    // 섹션1은 '첫 페이지만 다르게' → Primary 헤더가 2페이지부터 노출됨
-                    doc.Sections[1].PageSetup.DifferentFirstPageHeaderFooter = -1; // true
-
-                    // 섹션2 이후는 모두 같은 헤더 사용
-                    for (int secIdx = 2; secIdx <= doc.Sections.Count; secIdx++)
+                    catch (Exception ex)
                     {
-                        doc.Sections[secIdx].PageSetup.DifferentFirstPageHeaderFooter = 0; // false
+                        MessageBox.Show($"워드 편집 중 오류 발생:\n{ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    // 각 섹션의 Primary 헤더에 동일 이미지 삽입
-                    for (int secIdx = 1; secIdx <= doc.Sections.Count; secIdx++)
+                    finally
                     {
-                        var sec = doc.Sections[secIdx];
-                        var header = sec.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary]; //헤더수정 
-
-                        var inl = header.Range.InlineShapes.AddPicture(imagePath); //로고를 inline방식으로 삽입
-                        dynamic headerImage = inl.ConvertToShape(); // shape방식으로 변경 (편집 용이)
-
-                        // 배치 설정(그대로 유지)
-                        headerImage.WrapFormat.Type = Word.WdWrapType.wdWrapBehind; // 텍스트 뒤 형식
-                        headerImage.LockAspectRatio = Microsoft.Office.Core.MsoTriState.msoTrue; // 이미지 비율 고정
-
-                        headerImage.RelativeHorizontalPosition = Word.WdRelativeHorizontalPosition.wdRelativeHorizontalPositionMargin; //가로 기준: 여백
-                        headerImage.Left = (float)Word.WdShapePosition.wdShapeRight;  //오른쪽 끝
-                        headerImage.RelativeVerticalPosition = Word.WdRelativeVerticalPosition.wdRelativeVerticalPositionMargin; //세로 기준: 여백
-                        headerImage.Top = CmToPt(-2.4); // 세로 위치
-                        headerImage.Height = CmToPt(0.8); //비율 유지, 높이 0.8
-                                                          //headerImage.Width = CmToPt(3.5); //너비 기준으로 하고싶은경우 사용 
+                        if (doc != null) WordSafe.CloseDoc(doc, Word.WdSaveOptions.wdSaveChanges);
                     }
-
-                    doc.Save();
-                    doc.Close();
-                    wordApp.Quit();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("워드 편집 중 오류 발생:\n" + ex.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
+                MessageBox.Show("모든 문서 생성을 완료했습니다.");
             }
-
-            MessageBox.Show("모든 문서 생성을 완료했습니다.");
+            catch (Exception exAll)
+            {
+                MessageBox.Show("작업 실행 중 치명적 오류:\n" + exAll.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                WordSafe.CleanupAll(killLeftover: true);
+            }
         }
+
 
         //cm을 microsoft word에서 사용하는 pt로 변환.
         private float CmToPt(double cm)
